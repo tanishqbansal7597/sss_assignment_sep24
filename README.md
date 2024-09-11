@@ -1,46 +1,73 @@
 Weather CLI Application
 Overview
-This project is a Python-based Command-Line Interface (CLI) application that allows users to log in, search for weather data in various locations using the OpenWeatherMap API, and store their search history in a MySQL database. The application provides user authentication and search history management while ensuring secure handling of user information.
+This is a Python-based Command-Line Interface (CLI) application that allows users to log in, search for weather data in various locations using the OpenWeatherMap API, and store their search history in a MySQL database. The application provides secure user authentication and detailed weather search history management.
 
 Features
-User Registration & Authentication: Users can create accounts and log in securely. Passwords are hashed using bcrypt for security.
-Weather Search: Once logged in, users can search for current weather information, including temperature, humidity, weather conditions, and wind speed.
-Search History Management: Every search is logged in a MySQL database, allowing users to view their past searches along with the weather data retrieved at the time.
-Error Handling: Handles invalid inputs, API errors, and database connection issues gracefully.
-Project Structure
-bash
-Copy code
-weather_cli_project/
-├── weather_cli.py        # Main application script
-├── .env                  # Environment variables (API key, DB credentials)
-├── venv/                 # Python virtual environment
-├── requirements.txt      # List of dependencies
-└── README.md             # Documentation file
+User Registration & Authentication
+Users can create accounts and log in.
+Passwords are hashed using bcrypt for security.
+Weather Search
+After logging in, users can search for current weather in any location (temperature, humidity, weather conditions, wind speed).
+Search History Management
+Every search is logged in the MySQL database, allowing users to view their past searches along with the weather data retrieved.
+Error Handling
+Handles invalid inputs, API errors, and database issues gracefully.
 Setup Instructions
 1. Clone the Repository
 bash
+
+Verify
+
+Open In Editor
+Edit
 Copy code
 git clone https://github.com/your-username/weather_cli_project.git
 cd weather_cli_project
 2. Set Up a Virtual Environment
-It's recommended to run the project in a virtual environment to manage dependencies:
+Create and activate a virtual environment to manage dependencies:
+
+For Windows:
 
 bash
+
+Verify
+
+Open In Editor
+Edit
 Copy code
 python -m venv venv
-source venv/Scripts/activate   # Windows
-# or
-source venv/bin/activate       # macOS/Linux
+venv\Scripts\activate
+For macOS/Linux:
+
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+python3 -m venv venv
+source venv/bin/activate
 3. Install Dependencies
 Install the required Python packages:
 
 bash
+
+Verify
+
+Open In Editor
+Edit
 Copy code
 pip install -r requirements.txt
 4. Configure Environment Variables
-Create a .env file in the project root directory and add the following variables:
+Create a .env file in the project root directory with the following contents:
 
 env
+
+Verify
+
+Open In Editor
+Edit
 Copy code
 OPENWEATHER_API_KEY=your_openweathermap_api_key
 DB_USER=sss_assignment_sep24
@@ -49,10 +76,15 @@ DB_HOST=localhost
 DB_NAME=weather_db
 Replace your_openweathermap_api_key with your actual OpenWeatherMap API key.
 
-5. Set Up MySQL Database
-Create a MySQL database and apply the following schema:
+5. Set Up the MySQL Database
+Run the following SQL commands to set up the database:
 
 sql
+
+Verify
+
+Open In Editor
+Edit
 Copy code
 CREATE DATABASE weather_db;
 USE weather_db;
@@ -75,65 +107,106 @@ CREATE TABLE search_history (
     FOREIGN KEY (user_id) REFERENCES users(id)
 );
 6. Run the Application
-Once the environment is set up, run the application using the following command:
+Run the application using the following command:
 
 bash
+
+Verify
+
+Open In Editor
+Edit
 Copy code
 python weather_cli.py
 Usage Instructions
-Register or Log in:
-The CLI will prompt you to either register a new account or log in with existing credentials.
+Register or Log in
+When you run the application, you'll be prompted to register a new account or log in with existing credentials.
 
-Search for Weather:
-After logging in, you can search for weather data by entering a location (e.g., "London").
+Search for Weather
+After logging in, you can search for current weather data by entering a location (e.g., "London").
 
-View Search History:
-You can view your search history, displaying past queries along with the corresponding weather data at the time.
+View Search History
+You can view your search history, displaying past queries along with the corresponding weather data.
 
 Example Flow
-Register/Login:
+Register
+bash
 
-yaml
+Verify
+
+Open In Editor
+Edit
 Copy code
 $ python weather_cli.py
 1. Register
 2. Login
 Choose an option: 1
-Enter username: example_user
-Enter password: example_password
+Enter username: your_username
+Enter password: your_password
 User registered successfully!
-Search for Weather:
+Login and Search
+bash
 
-yaml
+Verify
+
+Open In Editor
+Edit
 Copy code
+$ python weather_cli.py
+1. Register
+2. Login
+Choose an option: 2
+Enter username: your_username
+Enter password: your_password
+Login successful!
 Enter the location to search for weather: New York
 Weather data for New York:
-Temperature: 21.3°C
-Humidity: 70%
-Weather Conditions: clear sky
-Wind Speed: 3.5 m/s
-View Search History:
+- Temperature: 22°C
+- Humidity: 60%
+- Weather Conditions: clear sky
+- Wind Speed: 3.5 m/s
+View Search History
+bash
 
-sql
+Verify
+
+Open In Editor
+Edit
 Copy code
-View your search history:
-1. New York - 21.3°C, clear sky, Humidity: 70%, Wind: 3.5 m/s
-Database Schema
-users: Stores user information (username, password hash).
-search_history: Logs each weather search, linked to the user account, along with search timestamp and weather data.
-Error Handling
-The application has robust error handling for:
+Do you want to view your search history? (y/n): y
+1. New York - 22°C, clear sky, Humidity: 60%, Wind: 3.5 m/s, Time: 2023-10-01 12:34:56
+Project Structure
 
-Invalid login attempts.
-Errors in API requests (e.g., invalid location or API key).
-Database connection issues.
-Missing API keys or environment variables.
-Bonus Features
-Delete Search History: Users can delete specific search entries from their history.
-Profile Updates: Users can update their username or password.
-Extended Weather Data: The application can be extended to fetch 5-day weather forecasts or other weather-related data.
-Future Enhancements
-Support for additional weather queries, such as multi-day forecasts.
-Improve scalability and performance by optimizing database schema and queries.
-Conclusion
-This project demonstrates interaction with external APIs, secure user authentication, database management, and robust error handling in a Python-based CLI application. The modular design makes it easy to add new features or extend the existing functionality.
+Verify
+
+Open In Editor
+Edit
+Copy code
+weather_cli_project/
+├── weather_cli.py        # Main application script
+├── .env                  # Environment variables file
+├── requirements.txt      # List of dependencies
+├── README.md             # Documentation
+└── venv/                 # Python virtual environment
+Dependencies
+The project requires the following Python packages:
+
+requests
+bcrypt
+python-dotenv
+mysql-connector-python
+These are listed in the requirements.txt file and can be installed using:
+
+bash
+
+Verify
+
+Open In Editor
+Edit
+Copy code
+pip install -r requirements.txt
+Database Schema
+users
+Stores user credentials (username and hashed password).
+
+search_history
+Logs each weather search, linked to the user's account, along with search timestamp and weather data.
